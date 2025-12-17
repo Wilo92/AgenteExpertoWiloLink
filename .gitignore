@@ -1,0 +1,31 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# --- Variables de Entorno (¡MUY IMPORTANTE!) ---
+.env
+secrets.json
+
+# --- IDEs y Editores ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Logs y Temporales ---
+*.log
+uvicorn.pid
+
+# --- Frontend (Previsión para React) ---
+node_modules/
+dist/
+dist-ssr/
+*.local
