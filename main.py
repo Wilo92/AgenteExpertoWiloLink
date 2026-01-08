@@ -24,7 +24,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         
-        "https://langgraphfront-production.up.railway.app",
+        "https://langgraphfront-production.up.railway.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -54,7 +54,7 @@ def obtener_usuario_laravel(
                 "Authorization": f"Bearer {token}",
                 "Accept": "application/json",
             },
-            timeout=5
+            timeout=10
         )
 
         if response.status_code != 200:
