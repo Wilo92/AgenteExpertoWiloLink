@@ -37,31 +37,26 @@ app.add_middleware(
 class ConsultaInput(BaseModel):
     consulta: str
 
-
-# ----------- AUTH DEPENDENCY ----------
-def obtener_usuario_laravel(
-    auth: HTTPAuthorizationCredentials = Depends(security)
-):
+def obtener_usuario_laravel(auth: HTTPAuthorizationCredentials = Depends(security)):
     token = auth.credentials
-    LARAVEL_URL = os.getenv("LARAVEL_URL", "https://wilo-personal-project-production-ccd5.up.railway.app")
-
-    url_validacion = f"{LARAVEL_URL}/user-check-test"
+    # URL directa a la ruta de web.php que ya probamos
+    url_validacion = "https://wilo-personal-project-production-ccd5.up.railway.app/user-check-test"
 
     try:
         response = requests.get(
             url_validacion,
             headers={
+                # IMPORTANTE: Laravel en web.php a veces ignora el Bearer token
+                # si no tiene la cookie de sesión. 
                 "Authorization": f"Bearer {token}",
                 "Accept": "application/json",
             },
             timeout=10
         )
-
+        # Si Laravel responde 401, es porque no reconoce el token en la ruta web
         if response.status_code != 200:
-            raise HTTPException(
-                status_code=401,
-                detail="Token inválido o expirado en Willowlink"
-            )
+            print(f"Laravel rechazó el token: {response.status_code}")
+            raise HTTPException(status_code=401, detail="Sesión no reconocida")
 
         return response.json()
 
