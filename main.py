@@ -45,7 +45,7 @@ def obtener_usuario_laravel(
     token = auth.credentials
     LARAVEL_URL = os.getenv("LARAVEL_URL", "https://wilo-personal-project-production-ccd5.up.railway.app")
 
-    url_validacion = f"{LARAVEL_URL}/api/user-check"
+    url_validacion = f"{LARAVEL_URL}/user-check-test"
 
     try:
         response = requests.get(
