@@ -24,7 +24,9 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         
-        "https://agent.wilolink.online"
+        "https://agent.wilolink.online",
+        "https://wilolink.online",
+        "https://langgraphfront-production.up.railway.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
