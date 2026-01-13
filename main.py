@@ -24,7 +24,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         
-        "https://langgraphfront-production.up.railway.app"
+        "https://agent.wilolink.online"
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -40,7 +40,7 @@ class ConsultaInput(BaseModel):
 def obtener_usuario_laravel(auth: HTTPAuthorizationCredentials = Depends(security)):
     token = auth.credentials
     # URL directa a la ruta de web.php que ya probamos
-    url_validacion = "https://wilo-personal-project-production-ccd5.up.railway.app/user-check-test"
+    url_validacion = "https://wilolink.online/user-check-test"
 
     try:
         response = requests.get(
@@ -110,7 +110,7 @@ async def info_usuario(
     usuario: Dict = Depends(obtener_usuario_laravel)
 ):
     return {
-       "id": usuario["id"],
-       "name": usuario["name"],
-       "email": usuario["email"]
+        "id": usuario["id"],
+        "name": usuario["name"],
+        "email": usuario["email"]
     }
